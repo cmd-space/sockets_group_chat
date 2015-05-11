@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Broadcast Group Chat</title>
+    <link rel='stylesheet' href='/style.css' />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var name = prompt('Your name: ');
+            console.log(name);
+            var socket = io.connect();
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
