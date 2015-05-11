@@ -11,10 +11,14 @@
             var name = prompt('Your name: ');
             console.log(name);
             var socket = io.connect();
+            socket.emit('new_user', {name: name});
         });
     </script>
 </head>
 <body>
-    
+    <p><ul>Conversation Board</ul></p>
+    <div id='board'>
+        
+    </div>
 </body>
 </html>
