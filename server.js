@@ -19,27 +19,15 @@ var server = app.listen(8000, function(){
 
 var io = require('socket.io').listen(server);
 
-var chatters = {id: "", name: ""};
+var messages = [];
 
 io.sockets.on('connection', function(socket){
     console.log('Using sockets!');
     console.log(socket.id);
-    socket.on('new_user', function(data){
-        chatters.id += socket.id;
-        chatters.name += data.name;
-//        chatters.push(data.name);
-        console.log(chatters);
+    io.emit('post_messages', {messages: messages});
+    socket.on('new_message', function(data){ 
+        messages.push({name: data.name, message: data.message});
+        console.log(messages);
+        io.emit('post_messages', {messages: messages});
     });
-//    io.emit('count_increased', {count: counter});
-//    socket.on('increase_count', function(){
-//        counter += 1;
-//        io.emit('count_increased', {count: counter});
-//        console.log(counter);
-//        return counter;
-//    });
-//    socket.on('reset_counter', function(){
-//        counter = 0;
-//        io.emit('counter_null', {count: counter});
-//        return counter;
-//    });
 });

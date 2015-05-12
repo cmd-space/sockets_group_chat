@@ -9,16 +9,35 @@
     <script type="text/javascript">
         $(document).ready(function(){
             var name = prompt('Your name: ');
-            console.log(name);
             var socket = io.connect();
-            socket.emit('new_user', {name: name});
+            $('form').submit(function(){
+                socket.emit('new_message', {name: name, message: this.message.value});
+                $('#m').val('');
+                return false;
+            });
+            var count = 0;
+            socket.on('post_messages', function(data){
+                var messages = data.messages;
+                if(messages.length > 0){
+                    for(var i = count; i < messages.length; i++){
+                        $('#board').append(messages[i].name+': '+messages[i].message+'<br>');
+                        count++;
+                    }
+                }
+            });
         });
     </script>
 </head>
 <body>
     <p><ul>Conversation Board</ul></p>
     <div id='board'>
-        
+    
+    </div>
+    <div>
+        <form action="">
+            <textarea id='m' name="message" placeholder="enter your message here" cols="100" rows="1"></textarea>
+            <input type="submit" value="send">
+        </form>
     </div>
 </body>
 </html>
