@@ -3,3 +3,7 @@ div{
     padding: 2em 2em;
     margin: 1em 1em;
 }
+#board{
+    max-height: 30em;
+    overflow: auto;
+}
